@@ -2,16 +2,15 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 
-const Form = () => {
+const Form = (props) => {
     
+    const {list, setList} = props;
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [desc, setDesc] = useState('');
     
-    
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log('hi')
         axios.post('http://localhost:8000/api/products', {
             title,
             price,
@@ -20,16 +19,15 @@ const Form = () => {
         .then((res) => {
             console.log(res)
             console.log(res.data)
+            setList([...list, res.data])
         })
         .catch((err) => {
             console.log(err)
         });
+        setTitle('');
+        setPrice('');
+        setDesc('');
     }
-    
-    
-
-    
-    
     
     return (
         <div>
@@ -51,16 +49,7 @@ const Form = () => {
                         onChange = {(e) => setDesc(e.target.value)} />
                 </div>
                 <button className = 'button'>Create</button>
-
-
-
-
             </form>
-
-
-
-
-
         </div>
     );
 }

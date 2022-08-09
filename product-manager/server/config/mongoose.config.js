@@ -10,5 +10,3 @@ mongoose.connect('mongodb://localhost/product-database',{
     .catch((err) => {
         console.log(err)
     });
-
-    

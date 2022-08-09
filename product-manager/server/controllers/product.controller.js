@@ -20,6 +20,16 @@ module.exports = {
             .catch((err) => {
                 console.log('Error in find all', err)
             });
+    },
+
+    findSingle: (req, res) => {
+        Product.findOne({_id: req.params.id})
+            .then((singleItem) => {
+                res.json(singleItem)
+            })
+            .catch((err) => {
+                console.log('Error in find one', err)
+            });
     }
 }
 
