@@ -2,6 +2,7 @@ const Product = require('../models/product.model');
 
 module.exports = {
     addProduct: (req, res) => {
+        
         Product.create(req.body)
             .then((newProduct) => {
                 res.json(newProduct)
@@ -23,6 +24,7 @@ module.exports = {
     },
 
     findSingle: (req, res) => {
+        
         Product.findOne({_id: req.params.id})
             .then((singleItem) => {
                 res.json(singleItem)
@@ -30,6 +32,26 @@ module.exports = {
             .catch((err) => {
                 console.log('Error in find one', err)
             });
+    },
+
+    updateProduct: (req, res) => {
+        Product.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+            .then((updatedProduct) => {
+                res.json(updatedProduct)
+            })
+            .catch((err) => {
+                console.log('Error in update', err)
+            })
+    },
+
+    deleteProduct: (req, res) => {
+        Product.deleteOne({_id: req.params.id})
+            .then((deleteConfirm) => {
+                res.json(deleteConfirm)
+            })
+            .catch((err) => {
+                console.log('Error in delete', err)
+            })
     }
 }
 

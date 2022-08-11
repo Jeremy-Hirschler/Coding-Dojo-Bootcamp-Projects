@@ -7,11 +7,13 @@ const Item = (props) => {
 
     const {id} = useParams();
     const [oneItem, setOneItem] = useState({});
-    
+
     useEffect(() => {
         axios.get(`http://localhost:8000/api/products/${id}`)
             .then((res) => {
+                
                 setOneItem(res.data)
+                
             })
             .catch((err) => {
                 console.log(err)

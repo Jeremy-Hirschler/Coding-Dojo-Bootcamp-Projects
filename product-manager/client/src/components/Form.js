@@ -17,8 +17,7 @@ const Form = (props) => {
             desc
         })
         .then((res) => {
-            console.log(res)
-            console.log(res.data)
+            
             setList([...list, res.data])
         })
         .catch((err) => {
